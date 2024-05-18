@@ -5,6 +5,9 @@ public partial class Player : Area2D
 	[Export]
 	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
 
+	[Export]
+	public PackedScene ProjectileScene;
+
 	[Signal]
 	public delegate void HitEventHandler();
 
@@ -22,6 +25,14 @@ public partial class Player : Area2D
 	{
 		Position = position;
 		GetNode<CollisionPolygon2D>("CollisionPolygon2D").Disabled = false;
+	}
+
+	private void Shoot()
+	{
+		// Need instance of Projectile
+		Projectile projectileInstance = (Projectile)ProjectileScene.Instantiate();
+		projectileInstance.Position = new Vector2(Position.X, Position.Y - 20);
+		GetParent().AddChild(projectileInstance);
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -42,6 +53,10 @@ public partial class Player : Area2D
 		if (Input.IsActionPressed("player_right"))
 		{
 			velocity.X += 1;
+		}
+		if (Input.IsActionPressed("player_shoot"))
+		{
+			Shoot();
 		}
 
 		if (velocity.Length() > 0)
