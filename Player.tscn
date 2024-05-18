@@ -25,3 +25,5 @@ polygon = PackedVector2Array(0, -18, -18, 2, -6, 16, 6, 16, 18, 1, 0, -18)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_xk8wl")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
