@@ -5,7 +5,24 @@ public partial class Player : Area2D
 	[Export]
 	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
 
+	[Signal]
+	public delegate void HitEventHandler();
+
 	public Vector2 ScreenSize; // Size of the game window.
+
+	private void OnBodyEntered(Node2D body)
+	{
+		GD.Print("Player Hit!");
+		// TODO: Trigger way to flash Player sprite
+		EmitSignal(SignalName.Hit);
+		GetNode<CollisionPolygon2D>("CollisionPolygon2D").SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
+	}
+
+	public void Start(Vector2 position)
+	{
+		Position = position;
+		GetNode<CollisionPolygon2D>("CollisionPolygon2D").Disabled = false;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
