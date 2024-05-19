@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Projectile : RigidBody2D
 {
@@ -8,8 +7,16 @@ public partial class Projectile : RigidBody2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		GD.Print("Projectile Hit!");
-		QueueFree();
+		GD.Print("Projectile Hit!", body);
+		if (body is Area2D area)
+		{
+			if (area.IsInGroup("invaders"))
+			{
+				QueueFree();
+			}
+			
+		}
+		
 	}
 
 	// Called when the node enters the scene tree for the first time.

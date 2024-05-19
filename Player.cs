@@ -36,7 +36,7 @@ public partial class Player : Area2D
 	{
 		// Need instance of Projectile
 		Projectile projectileInstance = (Projectile)ProjectileScene.Instantiate();
-		projectileInstance.Position = new Vector2(Position.X, Position.Y - 20);
+		projectileInstance.Position = new Vector2(Position.X, Position.Y - 30);
 		GetParent().AddChild(projectileInstance);
 	}
 
