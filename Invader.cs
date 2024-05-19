@@ -7,7 +7,10 @@ public partial class Invader : Area2D
 	{
 		GD.Print("Invader Hit!");
 		// Update score?
+		// Remove projectile from screen
+		body.QueueFree();
 		// Remove Invader from screen
+		
 		QueueFree();
 	}
 
