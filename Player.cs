@@ -69,7 +69,7 @@ public partial class Player : Area2D
 		if (velocity.Length() > 0)
 		{
 			velocity = velocity.Normalized() * Speed;
-			// Start animation once we have those assets
+			// TODO: Start animation once we have those assets
 		}
 		else 
 		{

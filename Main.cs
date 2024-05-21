@@ -59,6 +59,15 @@ public partial class Main : Node2D
 		}
 	}
 
+	private void OnInvaderBoundaryAreaEntered(Area2D area)
+	{
+		if (area.IsInGroup("invaders"))
+		{
+			GetNode<CollisionShape2D>("/root/Main/RightInvaderBoundary/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+			GetTree().CallGroup("invaders", "ChangeDirection", "left");
+		}
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();

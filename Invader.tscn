@@ -17,10 +17,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Invader" type="Area2D"]
+[node name="Invader" type="Area2D" groups=["invaders"]]
 position = Vector2(336, 244)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_p4iqt")
 metadata/_edit_group_ = true
 
