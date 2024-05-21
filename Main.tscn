@@ -39,5 +39,5 @@ metadata/_edit_group_ = true
 position = Vector2(0, -2.03848e-06)
 shape = SubResource("RectangleShape2D_5glia")
 
-[connection signal="area_entered" from="RightInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered" binds= ["left"]]
-[connection signal="area_entered" from="LeftInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered" binds= ["right"]]
+[connection signal="area_entered" from="RightInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered"]
+[connection signal="area_entered" from="LeftInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered"]
