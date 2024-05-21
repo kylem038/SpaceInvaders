@@ -18,14 +18,26 @@ position = Vector2(320, 450)
 position = Vector2(320, 450)
 
 [node name="RightInvaderBoundary" type="Area2D" parent="."]
-position = Vector2(525, 207)
+position = Vector2(560, 208)
 rotation = 1.5708
 collision_layer = 8
-collision_mask = 6
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightInvaderBoundary"]
 position = Vector2(0, -2.03848e-06)
 shape = SubResource("RectangleShape2D_5glia")
 
-[connection signal="area_entered" from="RightInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered"]
+[node name="LeftInvaderBoundary" type="Area2D" parent="."]
+position = Vector2(90, 207)
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftInvaderBoundary"]
+position = Vector2(0, -2.03848e-06)
+shape = SubResource("RectangleShape2D_5glia")
+
+[connection signal="area_entered" from="RightInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered" binds= ["left"]]
+[connection signal="area_entered" from="LeftInvaderBoundary" to="." method="OnInvaderBoundaryAreaEntered" binds= ["right"]]

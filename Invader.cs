@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Invader : Area2D
 {
-	private int Speed = 150;
+	private int Speed = 250;
 	public string Direction { get; set; } = "right";
 	private float MoveCooldown = 0.5f;
 	private float _timeSinceLastMove = 0f;
