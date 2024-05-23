@@ -8,6 +8,9 @@ public partial class Main : Node2D
 	[Export]
 	public PackedScene InvaderScene { get; set; }
 
+	[Export]
+	public PackedScene PathingScene { get; set; }
+
 	private int rowStart = 50;
 	private int rowGutter = 50;
 	private int numberOfRows = 4;
@@ -48,24 +51,18 @@ public partial class Main : Node2D
 		{
 			foreach (int column in invaderColumns)
 			{
-				// Create instance of Invader
+				// Create instance of Pathing
+				Path2D pathing = PathingScene.Instantiate<Path2D>();
+				// Create starting point for Pathing
+				pathing.Position = getInvaderSpawnPosition(column, invaderRows[i]);
+				// Add instance of Invader as child of PathFollow2D
+				PathFollow2D invaderPath = (PathFollow2D)pathing.GetChild(0);
 				Invader invader = InvaderScene.Instantiate<Invader>();
-				// Set position of Invader
-				invader.Position = getInvaderSpawnPosition(column, invaderRows[i]);
-				// Add child
-				AddChild(invader);
+				invaderPath.AddChild(invader);
+				// Add Pathing to main scene
+				AddChild(pathing);
 			}
 			
-		}
-	}
-
-	private void OnInvaderBoundaryAreaEntered(Area2D area)
-	{
-		if (area.IsInGroup("invaders"))
-		{
-			GetTree().CallGroup("invaders", "ChangeDirection");
-			GetNode<CollisionShape2D>("/root/Main/RightInvaderBoundary/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-			GetNode<CollisionShape2D>("/root/Main/LeftInvaderBoundary/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 		}
 	}
 

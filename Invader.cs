@@ -2,14 +2,12 @@ using Godot;
 
 public partial class Invader : Area2D
 {
-	private int Speed = 250;
-	public string Direction { get; set; } = "right";
-	private string NextDirection { get; set; } = "left";
-	private bool HasTriggeredDownMovement = false;
-	private bool KickOut = false;
+	[Export]
+	private int Speed = 300;
+
 	private float MoveCooldown = 0.5f;
 	private float _timeSinceLastMove = 0f;
-	private int Called = 0;
+	PathFollow2D Pathing { get; set; }
 
 	private void OnBodyEntered(Node2D body)
 	{
@@ -22,79 +20,20 @@ public partial class Invader : Area2D
 		QueueFree();
 	}
 
-	private void ChangeDirection()
-	{	
-
-		// Move downward for 1 "game loop"
-		if (!HasTriggeredDownMovement) {
-			GD.Print("Starting down movement");
-			Direction = "down";
-			HasTriggeredDownMovement = true;
-		}
-		// Then continue back to other boundary
-		else
-		{
-			GD.Print("Starting direction swap");
-			Direction = NextDirection;
-			if (NextDirection == "left")
-			{
-				NextDirection = "right";
-			}
-			else
-			{
-				NextDirection = "left";
-			}
-
-			// Reenable Boundary Collision Boxes
-			GetNode<CollisionShape2D>("/root/Main/RightInvaderBoundary/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
-			GetNode<CollisionShape2D>("/root/Main/LeftInvaderBoundary/CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
-
-			HasTriggeredDownMovement = false;
-			KickOut = true;
-		}
-		GD.Print("Current direction is: ", Direction);
-		GD.Print("Next direction is: ", NextDirection);
-		if (KickOut) return;
-		Called++;
-		GD.Print("Called: ", Called);
-		ChangeDirection();
-	}
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Pathing = (PathFollow2D)GetParent();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		// Make the Invaders appear to move on a timer
-		// To mimic original space invaders
 		_timeSinceLastMove += (float)delta;
-		Vector2 velocity = Vector2.Zero;
-
 		if (_timeSinceLastMove > MoveCooldown)
 		{
-			if (Direction == "right")
-			{
-				velocity.X += 1;
-			} 
-			if (Direction == "left")
-			{
-				velocity.X -= 1;
-			}
-			if (Direction == "down")
-			{
-				velocity.Y += 1;
-			}
-
-			if (velocity.Length() > 0)
-			{
-				velocity = velocity.Normalized() * Speed;
-			}
-
-			Position += velocity * (float)delta;
-
+			Pathing.Progress += Speed * (float)delta;
 			_timeSinceLastMove = 0;
 		}
 	}

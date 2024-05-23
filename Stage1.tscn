@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4rqu5l85r8f0"]
+
+[sub_resource type="Curve2D" id="Curve2D_tkcql"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, -64, 64, 0, 0, 0, 0, -64, 128, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 64, 128, 0, 0, 0, 0, 64, 192, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, -64, 192, 0, 0, 0, 0, -64, 256, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 64, 256)
+}
+point_count = 14
+
+[node name="Path2D" type="Path2D"]
+curve = SubResource("Curve2D_tkcql")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+
+[node name="_Timer_22683" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true
