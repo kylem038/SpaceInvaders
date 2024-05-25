@@ -66,9 +66,17 @@ public partial class Main : Node2D
 		}
 	}
 
+	private void OnInvaderShootTimerTimeout()
+	{
+		GD.Print("Pick random invader to shoot!");
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();
+
+		// Start invader shoot timer
+		GetNode<Timer>("InvaderShootTimer").Start();
 	}
 
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://copcclwtbifbe"]
+[gd_scene load_steps=6 format=3 uid="uid://copcclwtbifbe"]
 
 [ext_resource type="Script" path="res://Invader.cs" id="1_p4iqt"]
 [ext_resource type="Texture2D" uid="uid://0vpp8gkfpaor" path="res://art/Invader1.png" id="1_v6a6y"]
+[ext_resource type="PackedScene" uid="uid://qne2s471ofnd" path="res://Projectile.tscn" id="2_8pfsj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngckn"]
 size = Vector2(26, 22)
@@ -21,6 +22,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_p4iqt")
+ProjectileScene = ExtResource("2_8pfsj")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
