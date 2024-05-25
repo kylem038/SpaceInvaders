@@ -1,22 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://qne2s471ofnd"]
+[gd_scene load_steps=4 format=3 uid="uid://qne2s471ofnd"]
 
 [ext_resource type="Script" path="res://Projectile.cs" id="1_1xm0m"]
-[ext_resource type="Texture2D" uid="uid://t41tgmult0qi" path="res://art/SpaceInvader-Projectile.png" id="1_7sphq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31chn"]
 radius = 5.0
 height = 18.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wwcru"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_7sphq")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Projectile" type="RigidBody2D"]
 position = Vector2(332, 245)

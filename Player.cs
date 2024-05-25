@@ -15,7 +15,9 @@ public partial class Player : Area2D
 
 	private float ShootCooldown = 1.0f;
 	private float _timeSinceLastShot = 0f;
-	
+	private int projectileYVelocity = -400;
+
+	Texture2D spriteFrames = (Texture2D)ResourceLoader.Load("res://art/SpaceInvader-Projectile.png");
 
 	private void OnBodyEntered(Node2D body)
 	{
@@ -37,7 +39,14 @@ public partial class Player : Area2D
 		// Need instance of Projectile
 		Projectile projectileInstance = (Projectile)ProjectileScene.Instantiate();
 		projectileInstance.Position = new Vector2(Position.X, Position.Y - 30);
+
 		GetParent().AddChild(projectileInstance);
+
+		// Set the texture
+		projectileInstance.SetTexture(spriteFrames);
+
+		// Set the velocity
+		projectileInstance.SetVelocity(new Vector2(0, projectileYVelocity));
 	}
 
 	// Called when the node enters the scene tree for the first time.
