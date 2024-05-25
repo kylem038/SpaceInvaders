@@ -25,7 +25,7 @@ public partial class Player : Area2D
 		// TODO: Trigger way to flash Player sprite
 		// TODO: Remove Health
 		EmitSignal(SignalName.Hit);
-		GetNode<CollisionPolygon2D>("CollisionPolygon2D").SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
+		body.QueueFree();
 	}
 
 	public void Start(Vector2 position)

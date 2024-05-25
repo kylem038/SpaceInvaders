@@ -40,6 +40,10 @@ public partial class Invader : Area2D
 
 		// Set the velocity
 		projectileInstance.SetVelocity(new Vector2(0, projectileYVelocity));
+
+		// Set collision layer and mask
+		projectileInstance.CollisionLayer = 1 << 0;
+		projectileInstance.CollisionMask = 1 << 0;
 	}
 
 	// Called when the node enters the scene tree for the first time.

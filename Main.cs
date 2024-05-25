@@ -88,7 +88,7 @@ public partial class Main : Node2D
 	{
 		List<Invader> invaderInstances = GetChildrenOfType<Invader>(GetNode<Main>("/root/Main"));
 		// pick random instance
-		Invader randomInvader = invaderInstances[GD.RandRange(0, invaderInstances.Count)];
+		Invader randomInvader = invaderInstances[GD.RandRange(0, invaderInstances.Count - 1)];
 		return randomInvader;
 	}
 
