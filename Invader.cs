@@ -27,9 +27,11 @@ public partial class Invader : Area2D
 
 	public void Shoot()
 	{
+		GD.Print("Invader shooting!");
+
 		// Need instance of Projectile
 		Projectile projectileInstance = (Projectile)ProjectileScene.Instantiate();
-		projectileInstance.Position = new Vector2(Position.X, Position.Y - 30);
+		projectileInstance.Position = new Vector2(Position.X, Position.Y);
 
 		GetParent().AddChild(projectileInstance);
 

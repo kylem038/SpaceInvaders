@@ -66,9 +66,36 @@ public partial class Main : Node2D
 		}
 	}
 
+	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
+    {
+        List<T> childrenOfType = new List<T>();
+
+        foreach (Node child in parentNode.GetChildren())
+        {
+            if (child is T)
+            {
+                childrenOfType.Add(child as T);
+            }
+
+            // Recursively check for children of this child
+            childrenOfType.AddRange(GetChildrenOfType<T>(child));
+        }
+
+        return childrenOfType;
+    }
+
+	private Invader getRandomInvaderInstance()
+	{
+		List<Invader> invaderInstances = GetChildrenOfType<Invader>(GetNode<Main>("/root/Main"));
+		// pick random instance
+		Invader randomInvader = invaderInstances[GD.RandRange(0, invaderInstances.Count)];
+		return randomInvader;
+	}
+
 	private void OnInvaderShootTimerTimeout()
 	{
-		GD.Print("Pick random invader to shoot!");
+		Invader randomInvader = getRandomInvaderInstance();
+		randomInvader.Shoot();
 	}
 
 	private void StartLevel()
