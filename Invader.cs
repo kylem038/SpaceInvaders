@@ -11,7 +11,7 @@ public partial class Invader : Area2D
 	private float MoveCooldown = 0.5f;
 	private float _timeSinceLastMove = 0f;
 	private int projectileYVelocity = 300;
-	Texture2D projectileTexture = (Texture2D)ResourceLoader.Load("res://art/SpaceInvader-Projectile.png");
+	Texture2D projectileTexture = (Texture2D)ResourceLoader.Load("res://art/Invader-Bomb.png");
 	PathFollow2D Pathing { get; set; }
 
 	private void OnBodyEntered(Node2D body)
