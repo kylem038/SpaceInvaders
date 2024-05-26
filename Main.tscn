@@ -15,3 +15,8 @@ position = Vector2(320, 450)
 
 [node name="Player" parent="." instance=ExtResource("1_r8oak")]
 position = Vector2(320, 450)
+
+[node name="InvaderShootTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]

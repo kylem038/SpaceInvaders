@@ -1,27 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://qne2s471ofnd"]
 
 [ext_resource type="Script" path="res://Projectile.cs" id="1_1xm0m"]
-[ext_resource type="Texture2D" uid="uid://t41tgmult0qi" path="res://art/SpaceInvader-Projectile.png" id="1_7sphq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31chn"]
 radius = 5.0
 height = 18.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wwcru"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_7sphq")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugqy"]
+radius = 5.0
+height = 18.0
 
 [node name="Projectile" type="RigidBody2D"]
-position = Vector2(332, 245)
+position = Vector2(332, 246)
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 gravity_scale = 0.0
 script = ExtResource("1_1xm0m")
 metadata/_edit_group_ = true
@@ -31,3 +25,13 @@ shape = SubResource("CapsuleShape2D_31chn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wwcru")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_8ugqy")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

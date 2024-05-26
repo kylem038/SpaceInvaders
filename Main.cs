@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class Main : Node2D
 {
@@ -66,9 +64,44 @@ public partial class Main : Node2D
 		}
 	}
 
+	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
+    {
+        List<T> childrenOfType = new List<T>();
+
+        foreach (Node child in parentNode.GetChildren())
+        {
+            if (child is T)
+            {
+                childrenOfType.Add(child as T);
+            }
+
+            // Recursively check for children of this child
+            childrenOfType.AddRange(GetChildrenOfType<T>(child));
+        }
+
+        return childrenOfType;
+    }
+
+	private Invader getRandomInvaderInstance()
+	{
+		List<Invader> invaderInstances = GetChildrenOfType<Invader>(GetNode<Main>("/root/Main"));
+		// pick random instance
+		Invader randomInvader = invaderInstances[GD.RandRange(0, invaderInstances.Count - 1)];
+		return randomInvader;
+	}
+
+	private void OnInvaderShootTimerTimeout()
+	{
+		Invader randomInvader = getRandomInvaderInstance();
+		randomInvader.Shoot();
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();
+
+		// Start invader shoot timer
+		GetNode<Timer>("InvaderShootTimer").Start();
 	}
 
 
