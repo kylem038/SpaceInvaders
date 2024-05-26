@@ -22,6 +22,7 @@ position = Vector2(320, 450)
 wait_time = 3.0
 
 [node name="MothershipSpawnTimer" type="Timer" parent="."]
+wait_time = 15.0
 one_shot = true
 
 [connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]
