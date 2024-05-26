@@ -49,6 +49,7 @@ player_shoot={
 2d_physics/layer_2="invader"
 2d_physics/layer_3="playerProjectile"
 2d_physics/layer_4="invaderProjectile"
+2d_physics/layer_5="mothership"
 
 [rendering]
 

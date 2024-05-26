@@ -16,19 +16,15 @@ public partial class Invader : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		GD.Print("Invader Hit!");
 		// Update score?
 		// Remove projectile from screen
 		body.QueueFree();
 		// Remove Invader from screen
-		
 		QueueFree();
 	}
 
 	public void Shoot()
 	{
-		GD.Print("Invader shooting!");
-
 		// Need instance of Projectile
 		Projectile projectileInstance = (Projectile)ProjectileScene.Instantiate();
 		projectileInstance.Position = new Vector2(Position.X, Position.Y);

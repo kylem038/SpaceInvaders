@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://pt67smay5cmk"]
+
+[ext_resource type="Texture2D" uid="uid://bpvw3w1jn7i1d" path="res://art/Saucer1_large.png" id="1_dxm5y"]
+[ext_resource type="Script" path="res://Mothership.cs" id="1_r5k7t"]
+
+[node name="Mothership" type="Area2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_r5k7t")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_dxm5y")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-38, 12, -14, 24, 14, 24, 38, 12, 38, 4, 15, -8, -14, -8, -38, 4, -38, 12)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
