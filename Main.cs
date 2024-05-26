@@ -9,6 +9,9 @@ public partial class Main : Node2D
 	[Export]
 	public PackedScene PathingScene { get; set; }
 
+	[Export]
+	public PackedScene MothershipPathingScene { get; set; }
+
 	private int rowStart = 50;
 	private int rowGutter = 50;
 	private int numberOfRows = 4;
@@ -64,6 +67,14 @@ public partial class Main : Node2D
 		}
 	}
 
+	private void SpawnMothership()
+	{
+		GD.Print("Spawning Mothership");
+		Path2D pathing = MothershipPathingScene.Instantiate<Path2D>();
+		pathing.Position = new Vector2(0, 64);
+		AddChild(pathing);
+	}
+
 	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
     {
         List<T> childrenOfType = new List<T>();
@@ -96,12 +107,20 @@ public partial class Main : Node2D
 		randomInvader.Shoot();
 	}
 
+	private void OnMothershipSpawnTimerTimeout()
+	{
+		SpawnMothership();
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();
 
 		// Start invader shoot timer
 		GetNode<Timer>("InvaderShootTimer").Start();
+
+		// Start mothership spawn timer (wait X secs)
+		GetNode<Timer>("MothershipSpawnTimer").Start();
 	}
 
 
