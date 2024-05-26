@@ -17,6 +17,17 @@ public partial class Projectile : RigidBody2D
 		LinearVelocity = velocity;
 	}
 
+	private void OnBodyEntered(Node2D body)
+	{
+		// The Collision Layers / Masks are configured in such a way
+		// that this only fires when 2 projectiles collide
+		if (body is Projectile)
+		{
+			body.QueueFree();
+			QueueFree();
+		}
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

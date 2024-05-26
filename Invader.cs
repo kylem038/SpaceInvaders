@@ -10,7 +10,7 @@ public partial class Invader : Area2D
 
 	private float MoveCooldown = 0.5f;
 	private float _timeSinceLastMove = 0f;
-	private int projectileYVelocity = 300;
+	private int projectileYVelocity = 150;
 	Texture2D projectileTexture = (Texture2D)ResourceLoader.Load("res://art/Invader-Bomb.png");
 	PathFollow2D Pathing { get; set; }
 
@@ -42,8 +42,13 @@ public partial class Invader : Area2D
 		projectileInstance.SetVelocity(new Vector2(0, projectileYVelocity));
 
 		// Set collision layer and mask
-		projectileInstance.CollisionLayer = 1 << 0;
-		projectileInstance.CollisionMask = 1 << 0;
+		projectileInstance.CollisionLayer = 1 << 3;
+		projectileInstance.CollisionMask = (1 << 0) | (1 << 2);
+		
+		// Set collision for Area2D child to detect collision with Player projectile
+		Area2D childCollision = projectileInstance.GetNode<Area2D>("Area2D");
+		childCollision.CollisionLayer = 1 << 4;
+		childCollision.CollisionMask = 1 << 2;
 	}
 
 	// Called when the node enters the scene tree for the first time.
