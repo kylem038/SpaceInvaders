@@ -1,6 +1,6 @@
 # TODO Features
 
-- Player projectile can destroy Invader projectile [ ]
+- Player projectile can destroy Invader projectile [X]
 - Add a mothership worth extra points [ ]
 - Add UI for tracking score and health [ ]
 - Add bunker scene
