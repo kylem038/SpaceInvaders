@@ -12,7 +12,7 @@ public partial class Main : Node2D
 	[Export]
 	public PackedScene MothershipPathingScene { get; set; }
 
-	private int playerHealth = 3;
+	private int _playerHealth = 3;
 	private int _score = 0;
 
 	private int rowStart = 50;
@@ -115,6 +115,16 @@ public partial class Main : Node2D
 	private void OnMothershipSpawnTimerTimeout()
 	{
 		SpawnMothership();
+	}
+
+	private void OnPlayerHit()
+	{
+		_playerHealth--;
+		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
+		if (_playerHealth == 0)
+		{
+			GD.Print("Implement game over");
+		}
 	}
 
 	private void UpdateScore(int points)

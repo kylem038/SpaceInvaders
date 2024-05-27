@@ -28,6 +28,7 @@ one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("6_wvp5v")]
 
+[connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]
 [connection signal="timeout" from="MothershipSpawnTimer" to="." method="OnMothershipSpawnTimerTimeout"]
 [connection signal="StartGame" from="HUD" to="." method="OnHudStartGame"]
