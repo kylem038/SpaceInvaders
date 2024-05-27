@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Invader : Area2D
 {
+	[Signal]
+	public delegate void UpdateScoreEventHandler(int points);
+
 	[Export]
 	public PackedScene ProjectileScene;
 
@@ -17,6 +20,7 @@ public partial class Invader : Area2D
 	private void OnBodyEntered(Node2D body)
 	{
 		// Update score?
+		EmitSignal(SignalName.UpdateScore, 10);
 		// Remove projectile from screen
 		body.QueueFree();
 		// Remove Invader from screen
