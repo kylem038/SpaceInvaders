@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Mothership : Area2D
 {
+	[Signal]
+	public delegate void UpdateScoreEventHandler(int points);
+
 	[Export]
 	private int Speed = 150;
 
@@ -12,7 +15,7 @@ public partial class Mothership : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		// TODO: Score bonus points
+		EmitSignal(SignalName.UpdateScore, 50);
 		body.QueueFree();
 		QueueFree();
 	}

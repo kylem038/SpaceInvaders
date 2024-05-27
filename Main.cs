@@ -73,10 +73,11 @@ public partial class Main : Node2D
 
 	private void SpawnMothership()
 	{
-		GD.Print("Spawning Mothership");
 		Path2D pathing = MothershipPathingScene.Instantiate<Path2D>();
 		pathing.Position = new Vector2(0, 64);
 		AddChild(pathing);
+		Mothership mothership = GetNode<Mothership>("MothershipPath/PathFollow2D/Mothership");
+		mothership.UpdateScore += UpdateScore;
 	}
 
 	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
@@ -118,7 +119,6 @@ public partial class Main : Node2D
 
 	private void UpdateScore(int points)
 	{
-		GD.Print("Updating score");
 		_score += points;
 		GetNode<HUD>("HUD").UpdateScore(_score);
 	}
