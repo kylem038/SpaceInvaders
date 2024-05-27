@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://8w2cg6wdrra5"]
+[gd_scene load_steps=6 format=3 uid="uid://8w2cg6wdrra5"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_qfkws"]
 [ext_resource type="PackedScene" uid="uid://dl6ceir5rfv5j" path="res://Player.tscn" id="1_r8oak"]
 [ext_resource type="PackedScene" uid="uid://copcclwtbifbe" path="res://Invader.tscn" id="2_x6cvd"]
 [ext_resource type="PackedScene" uid="uid://b4rqu5l85r8f0" path="res://Stage1.tscn" id="3_2m0g2"]
+[ext_resource type="PackedScene" uid="uid://c7d5a3p8rrid6" path="res://MothershipPath.tscn" id="4_cn6u2"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_qfkws")
 InvaderScene = ExtResource("2_x6cvd")
 PathingScene = ExtResource("3_2m0g2")
+MothershipPathingScene = ExtResource("4_cn6u2")
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(320, 450)
@@ -19,4 +21,9 @@ position = Vector2(320, 450)
 [node name="InvaderShootTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="MothershipSpawnTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
 [connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]
+[connection signal="timeout" from="MothershipSpawnTimer" to="." method="OnMothershipSpawnTimerTimeout"]

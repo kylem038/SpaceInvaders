@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7d5a3p8rrid6"]
+
+[ext_resource type="PackedScene" uid="uid://pt67smay5cmk" path="res://Mothership.tscn" id="1_vbbe1"]
+
+[sub_resource type="Curve2D" id="Curve2D_gdr0r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 612, 0, 0, 0, 0, 0, 4, 0)
+}
+point_count = 3
+
+[node name="MothershipPath" type="Path2D"]
+position = Vector2(-100, 0)
+curve = SubResource("Curve2D_gdr0r")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(4, 0)
+rotates = false
+
+[node name="Mothership" parent="PathFollow2D" instance=ExtResource("1_vbbe1")]

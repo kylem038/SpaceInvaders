@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://diupl112w6hy4"]
+
+[ext_resource type="Texture2D" uid="uid://cq0wl4p2li3k3" path="res://art/CatLaser.png" id="1_mu1ey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vyo4l"]
+size = Vector2(44, 44)
+
+[node name="Laser" type="RigidBody2D"]
+collision_layer = 32
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mu1ey")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vyo4l")
