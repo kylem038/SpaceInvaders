@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb2ierctg7o3u"]
+
+[ext_resource type="Script" path="res://HUD.cs" id="1_rcyh5"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rcyh5")
+
+[node name="HealthLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Health: 3"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0"
+
+[node name="ControlsLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -124.0
+offset_right = 129.0
+offset_bottom = -23.0
+grow_vertical = 0
+text = "Controls:
+A - Move Left
+D - Move Right
+Space - Shoot"
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+
+[connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
