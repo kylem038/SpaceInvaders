@@ -115,6 +115,11 @@ public partial class Main : Node2D
 		SpawnMothership();
 	}
 
+	private void OnHudStartGame()
+	{
+		StartLevel();
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();
