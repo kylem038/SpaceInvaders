@@ -30,7 +30,7 @@ one_shot = true
 [node name="HUD" parent="." instance=ExtResource("6_wvp5v")]
 
 [node name="Bunker" parent="." instance=ExtResource("7_qfodg")]
-position = Vector2(320, 356)
+position = Vector2(320, 364)
 
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]

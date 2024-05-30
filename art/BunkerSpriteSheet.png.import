@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dreak5608vpta"
-path="res://.godot/imported/BunkerTileset.png-b25dca582e7b6969d905cdbf4cd5e4dc.ctex"
+uid="uid://bbhwctdidea3t"
+path="res://.godot/imported/BunkerSpriteSheet.png-f37c983f1e3f1efb15eaab5981a41030.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/BunkerTileset.png"
-dest_files=["res://.godot/imported/BunkerTileset.png-b25dca582e7b6969d905cdbf4cd5e4dc.ctex"]
+source_file="res://art/BunkerSpriteSheet.png"
+dest_files=["res://.godot/imported/BunkerSpriteSheet.png-f37c983f1e3f1efb15eaab5981a41030.ctex"]
 
 [params]
 
