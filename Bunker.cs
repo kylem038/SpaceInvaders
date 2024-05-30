@@ -3,6 +3,8 @@ using System;
 
 public partial class Bunker : Area2D
 {
+	private int _health = 4;
+
 	private void OnBodyEntered(Node2D body)
 	{
 		body.QueueFree();
