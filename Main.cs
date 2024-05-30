@@ -62,7 +62,6 @@ public partial class Main : Node2D
 				// Add instance of Invader as child of PathFollow2D
 				PathFollow2D invaderPath = (PathFollow2D)pathing.GetChild(0);
 				Invader invader = InvaderScene.Instantiate<Invader>();
-				invader.UpdateScore += UpdateScore;
 				invaderPath.AddChild(invader);
 				// Add Pathing to main scene
 				AddChild(pathing);

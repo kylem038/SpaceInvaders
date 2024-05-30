@@ -55,10 +55,17 @@ public partial class Invader : Area2D
 	public override void _Ready()
 	{
 		Pathing = (PathFollow2D)GetParent();
+		UpdateScore += GetNode<Main>("/root/Main").UpdateScore;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    public override void _ExitTree()
+    {
+		UpdateScore -= GetNode<Main>("/root/Main").UpdateScore;
+        base._ExitTree();
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		// Make the Invaders appear to move on a timer
 		_timeSinceLastMove += (float)delta;
