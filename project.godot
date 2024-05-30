@@ -51,6 +51,7 @@ player_shoot={
 2d_physics/layer_4="invaderProjectile"
 2d_physics/layer_5="mothership"
 2d_physics/layer_6="laser"
+2d_physics/layer_7="bunker"
 
 [rendering]
 

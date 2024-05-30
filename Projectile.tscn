@@ -15,7 +15,7 @@ height = 18.0
 [node name="Projectile" type="RigidBody2D"]
 position = Vector2(332, 246)
 collision_layer = 4
-collision_mask = 18
+collision_mask = 82
 gravity_scale = 0.0
 script = ExtResource("1_1xm0m")
 metadata/_edit_group_ = true

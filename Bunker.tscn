@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1deqeu2ni8kr"]
+
+[ext_resource type="Texture2D" uid="uid://t72uq8jcf7tf" path="res://art/Bunker.png" id="1_4eprd"]
+[ext_resource type="Script" path="res://Bunker.cs" id="1_8b57f"]
+
+[node name="Bunker" type="Area2D"]
+collision_layer = 65
+collision_mask = 44
+script = ExtResource("1_8b57f")
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, -14, 6, -14, 12, -7, 12, 14, -12, 14, -12, -7)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4eprd")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
