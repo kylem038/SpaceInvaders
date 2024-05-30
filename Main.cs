@@ -12,6 +12,9 @@ public partial class Main : Node2D
 	[Export]
 	public PackedScene MothershipPathingScene { get; set; }
 
+	private int _playerHealth = 3;
+	private int _score = 0;
+
 	private int rowStart = 50;
 	private int rowGutter = 50;
 	private int numberOfRows = 4;
@@ -63,13 +66,11 @@ public partial class Main : Node2D
 				// Add Pathing to main scene
 				AddChild(pathing);
 			}
-			
 		}
 	}
 
 	private void SpawnMothership()
 	{
-		GD.Print("Spawning Mothership");
 		Path2D pathing = MothershipPathingScene.Instantiate<Path2D>();
 		pathing.Position = new Vector2(0, 64);
 		AddChild(pathing);
@@ -112,6 +113,27 @@ public partial class Main : Node2D
 		SpawnMothership();
 	}
 
+	private void OnPlayerHit()
+	{
+		_playerHealth--;
+		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
+		if (_playerHealth == 0)
+		{
+			GD.Print("Implement game over");
+		}
+	}
+
+	public void UpdateScore(int points)
+	{
+		_score += points;
+		GetNode<HUD>("HUD").UpdateScore(_score);
+	}
+
+	private void OnHudStartGame()
+	{
+		StartLevel();
+	}
+
 	private void StartLevel()
 	{
 		SpawnInvaders();
@@ -127,7 +149,6 @@ public partial class Main : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		StartLevel();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

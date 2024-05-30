@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Invader : Area2D
 {
+	[Signal]
+	public delegate void UpdateScoreEventHandler(int points);
+
 	[Export]
 	public PackedScene ProjectileScene;
 
@@ -17,6 +20,7 @@ public partial class Invader : Area2D
 	private void OnBodyEntered(Node2D body)
 	{
 		// Update score?
+		EmitSignal(SignalName.UpdateScore, 10);
 		// Remove projectile from screen
 		body.QueueFree();
 		// Remove Invader from screen
@@ -51,10 +55,17 @@ public partial class Invader : Area2D
 	public override void _Ready()
 	{
 		Pathing = (PathFollow2D)GetParent();
+		UpdateScore += GetNode<Main>("/root/Main").UpdateScore;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    public override void _ExitTree()
+    {
+		UpdateScore -= GetNode<Main>("/root/Main").UpdateScore;
+        base._ExitTree();
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		// Make the Invaders appear to move on a timer
 		_timeSinceLastMove += (float)delta;
