@@ -67,7 +67,6 @@ public partial class Main : Node2D
 				// Add Pathing to main scene
 				AddChild(pathing);
 			}
-			
 		}
 	}
 
@@ -76,8 +75,6 @@ public partial class Main : Node2D
 		Path2D pathing = MothershipPathingScene.Instantiate<Path2D>();
 		pathing.Position = new Vector2(0, 64);
 		AddChild(pathing);
-		Mothership mothership = GetNode<Mothership>("MothershipPath/PathFollow2D/Mothership");
-		mothership.UpdateScore += UpdateScore;
 	}
 
 	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
@@ -127,7 +124,7 @@ public partial class Main : Node2D
 		}
 	}
 
-	private void UpdateScore(int points)
+	public void UpdateScore(int points)
 	{
 		_score += points;
 		GetNode<HUD>("HUD").UpdateScore(_score);

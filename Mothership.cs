@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Mothership : Area2D
@@ -15,6 +16,7 @@ public partial class Mothership : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
+		GetNode<Timer>("/root/Main/MothershipSpawnTimer").Start();
 		EmitSignal(SignalName.UpdateScore, 50);
 		body.QueueFree();
 		QueueFree();
@@ -34,10 +36,18 @@ public partial class Mothership : Area2D
 	{
 		Pathing = (PathFollow2D)GetParent();
 		GetNode<Timer>("ShootTimer").Start();
+		UpdateScore += GetNode<Main>("/root/Main").UpdateScore;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	// Called when the node is about to exit the scene tree
+    public override void _ExitTree()
+    {
+		UpdateScore -= GetNode<Main>("/root/Main").UpdateScore;
+        base._ExitTree();
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		Pathing.Progress += Speed * (float)delta;
 	}
