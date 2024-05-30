@@ -104,8 +104,12 @@ public partial class Main : Node2D
 
 	private void OnInvaderShootTimerTimeout()
 	{
-		Invader randomInvader = getRandomInvaderInstance();
-		randomInvader.Shoot();
+		var invaders = GetTree().GetNodesInGroup("invaders");
+		if (invaders.Count > 0)
+		{
+			Invader randomInvader = getRandomInvaderInstance();
+			randomInvader.Shoot();
+		}
 	}
 
 	private void OnMothershipSpawnTimerTimeout()
