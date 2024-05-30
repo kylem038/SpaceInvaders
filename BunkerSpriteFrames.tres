@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cihejr41lmq88"]
+
+[ext_resource type="Texture2D" uid="uid://bbhwctdidea3t" path="res://art/BunkerSpriteSheet.png" id="1_ehs27"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvgch"]
+atlas = ExtResource("1_ehs27")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ngr2"]
+atlas = ExtResource("1_ehs27")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t411h"]
+atlas = ExtResource("1_ehs27")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvgch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ngr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t411h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
