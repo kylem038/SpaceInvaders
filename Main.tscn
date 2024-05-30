@@ -32,12 +32,6 @@ one_shot = true
 [node name="Bunker" parent="." instance=ExtResource("7_qfodg")]
 position = Vector2(320, 364)
 
-[node name="Bunker3" parent="." instance=ExtResource("7_qfodg")]
-position = Vector2(515, 364)
-
-[node name="Bunker2" parent="." instance=ExtResource("7_qfodg")]
-position = Vector2(129, 364)
-
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="InvaderShootTimer" to="." method="OnInvaderShootTimerTimeout"]
 [connection signal="timeout" from="MothershipSpawnTimer" to="." method="OnMothershipSpawnTimerTimeout"]
