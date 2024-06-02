@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://pt67smay5cmk"]
+[gd_scene load_steps=5 format=3 uid="uid://pt67smay5cmk"]
 
 [ext_resource type="Texture2D" uid="uid://bpvw3w1jn7i1d" path="res://art/Saucer1_large.png" id="1_dxm5y"]
 [ext_resource type="Script" path="res://Mothership.cs" id="1_r5k7t"]
 [ext_resource type="PackedScene" uid="uid://diupl112w6hy4" path="res://Laser.tscn" id="2_kiu4f"]
+[ext_resource type="PackedScene" uid="uid://deh6r6fafabdq" path="res://Explosion.tscn" id="3_7nyy3"]
 
 [node name="Mothership" type="Area2D"]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("1_r5k7t")
 LasersScene = ExtResource("2_kiu4f")
+ExplosionScene = ExtResource("3_7nyy3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -19,6 +21,9 @@ polygon = PackedVector2Array(-38, 12, -14, 24, 14, 24, 38, 12, 38, 4, 15, -8, -1
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 0.25
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="timeout" from="ShootTimer" to="." method="OnShootTimerTimeout"]
