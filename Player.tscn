@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl6ceir5rfv5j"]
+[gd_scene load_steps=6 format=3 uid="uid://dl6ceir5rfv5j"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_1tq4h"]
 [ext_resource type="Texture2D" uid="uid://lebof3107ub2" path="res://art/SpaceFighter.png" id="1_a4yoe"]
 [ext_resource type="PackedScene" uid="uid://qne2s471ofnd" path="res://Projectile.tscn" id="2_7drhp"]
+[ext_resource type="PackedScene" uid="uid://deh6r6fafabdq" path="res://Explosion.tscn" id="3_y67sl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xk8wl"]
 animations = [{
@@ -28,5 +29,7 @@ polygon = PackedVector2Array(0, -18, -18, 2, -6, 16, 6, 16, 18, 1, 0, -18)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_xk8wl")
+
+[node name="Explosion" parent="." instance=ExtResource("3_y67sl")]
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

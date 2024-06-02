@@ -19,11 +19,17 @@ public partial class Player : Area2D
 
 	Texture2D projectileTexture = (Texture2D)ResourceLoader.Load("res://art/SpaceInvader-Projectile.png");
 
+	private void TriggerExplosion()
+	{
+		CpuParticles2D explosion = GetNode<CpuParticles2D>("Explosion/CPUParticles2D");
+		explosion.Amount = 30;
+		explosion.Emitting = true;
+	}
+
 	private void OnBodyEntered(Node2D body)
 	{
-		GD.Print("Player Hit!");
+		TriggerExplosion();
 		// TODO: Trigger way to flash Player sprite
-		// TODO: Remove Health
 		EmitSignal(SignalName.Hit);
 		body.QueueFree();
 	}
