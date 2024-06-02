@@ -6,6 +6,6 @@
 - Add bunker scene [X]
 - Add particle effects [ ]
 - Use shader to indicate when Player is hit [ ]
-- Add background []
-- Add music and sfx
-- Add variety of invader assets
+- Add background [X]
+- Add music and sfx []
+- Add variety of invader assets []
