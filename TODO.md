@@ -4,7 +4,7 @@
 - Add a mothership worth extra points [X]
 - Add UI for tracking score and health [X]
 - Add bunker scene [X]
-- Add particle effects [ ]
+- Add particle effects [X]
 - Use shader to indicate when Player is hit [ ]
 - Add background [X]
 - Add music and sfx []
