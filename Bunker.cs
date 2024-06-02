@@ -7,12 +7,18 @@ public partial class Bunker : Area2D
 
 	AnimatedSprite2D animation { get; set; }
 
+	private void TriggerExplosion()
+	{
+		CpuParticles2D explosion = GetNode<CpuParticles2D>("Explosion/CPUParticles2D");
+		explosion.Emitting = true;
+	}
+
 	private void OnBodyEntered(Node2D body)
 	{
+		TriggerExplosion();
 		_health -= 1;
 		if (_health == 0)
 		{
-			GD.Print("Clearing Bunker");
 			QueueFree();
 		}
 		else
