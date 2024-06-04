@@ -29,6 +29,7 @@ public partial class Player : Area2D
 	private void OnBodyEntered(Node2D body)
 	{
 		TriggerExplosion();
+		GetNode<AnimationPlayer>("HitAnimationPlayer").Play("hit");
 		// TODO: Trigger way to flash Player sprite
 		EmitSignal(SignalName.Hit);
 		body.QueueFree();
