@@ -24,6 +24,8 @@ public partial class Invader : Area2D
 		CpuParticles2D explosion = GetNode<CpuParticles2D>("Explosion/CPUParticles2D");
 		explosion.Emitting = true;
 		_explosionTimer.Start();
+
+		GetNode<AudioStreamPlayer>("/root/Main/Explosion").Play();
 	}
 
 	private void OnTimerTimeout()
@@ -40,6 +42,7 @@ public partial class Invader : Area2D
 	{
 		// Spawn explosion
 		TriggerExplosion();
+		
 		// Update score?
 		EmitSignal(SignalName.UpdateScore, 10);
 		// Remove projectile from screen

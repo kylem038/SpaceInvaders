@@ -11,6 +11,8 @@ public partial class Bunker : Area2D
 	{
 		CpuParticles2D explosion = GetNode<CpuParticles2D>("Explosion/CPUParticles2D");
 		explosion.Emitting = true;
+
+		GetNode<AudioStreamPlayer>("/root/Main/Explosion").Play();
 	}
 
 	private void OnBodyEntered(Node2D body)

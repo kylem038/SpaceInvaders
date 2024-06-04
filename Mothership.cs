@@ -29,6 +29,8 @@ public partial class Mothership : Area2D
 		explosion.Amount = 40;
 		explosion.Emitting = true;
 		_explosionTimer.Start();
+
+		GetNode<AudioStreamPlayer>("/root/Main/Explosion").Play();
 	}
 
 	private void OnExplosionTimerTimeout()
