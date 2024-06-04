@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl6ceir5rfv5j"]
+[gd_scene load_steps=11 format=3 uid="uid://dl6ceir5rfv5j"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_1tq4h"]
 [ext_resource type="Texture2D" uid="uid://lebof3107ub2" path="res://art/SpaceFighter.png" id="1_a4yoe"]
 [ext_resource type="PackedScene" uid="uid://qne2s471ofnd" path="res://Projectile.tscn" id="2_7drhp"]
+[ext_resource type="Shader" uid="uid://bfp6jig4ck14d" path="res://PlayerHitFlash.tres" id="3_mo1ji"]
 [ext_resource type="PackedScene" uid="uid://deh6r6fafabdq" path="res://Explosion.tscn" id="3_y67sl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfnpy"]
+shader = ExtResource("3_mo1ji")
+shader_parameter/Enabled = false
+shader_parameter/HitColor = Color(1, 0, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xk8wl"]
 animations = [{
@@ -16,6 +22,43 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_6xw70"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_i8sti"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rve81"]
+_data = {
+"RESET": SubResource("Animation_i8sti"),
+"hit": SubResource("Animation_6xw70")
+}
+
 [node name="Player" type="Area2D"]
 position = Vector2(340, 238)
 collision_mask = 40
@@ -24,12 +67,19 @@ ProjectileScene = ExtResource("2_7drhp")
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, -18, -18, 2, -6, 16, 6, 16, 18, 1, 0, -18)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_qfnpy")
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_xk8wl")
 
 [node name="Explosion" parent="." instance=ExtResource("3_y67sl")]
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rve81")
+}
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
