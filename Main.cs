@@ -147,6 +147,14 @@ public partial class Main : Node2D
 
 		// Start mothership spawn timer (wait X secs)
 		GetNode<Timer>("MothershipSpawnTimer").Start();
+
+		// Check if music is playing, if not start it up
+		// Its set to loop so just need this once
+		AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
+		if(!music.Playing)
+		{
+			music.Play();
+		}
 	}
 
 
