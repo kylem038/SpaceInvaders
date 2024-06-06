@@ -71,6 +71,11 @@ public partial class Invader : Area2D
 		Area2D childCollision = projectileInstance.GetNode<Area2D>("Area2D");
 		childCollision.CollisionLayer = 1 << 4;
 		childCollision.CollisionMask = 1 << 2;
+
+		// Play shoot sound
+		AudioStreamPlayer shootSound = GetNode<AudioStreamPlayer>("/root/Main/Projectile");
+		shootSound.PitchScale = (float)GD.RandRange(0.5, 1);
+		shootSound.Play();
 	}
 
 	// Called when the node enters the scene tree for the first time.
