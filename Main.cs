@@ -21,6 +21,7 @@ public partial class Main : Node2D
 	private int columnStart = 150;
 	private int columnGutter = 50;
 	private int numberofColumns = 8;
+	private int currentLevel = 3;
 
 	private int[] generateColumns()
 	{
@@ -47,6 +48,22 @@ public partial class Main : Node2D
 		return new Vector2(column, row);
 	}
 
+	private int GetInvaderSpeed()
+	{
+		if (currentLevel == 1)
+		{
+			return 300;
+		} 
+		else if (currentLevel == 2)
+		{
+			return 400;
+		} 
+		else
+		{
+			return 500;
+		}
+	}
+
 	private void SpawnInvaders()
 	{
 		int[] invaderRows = generateRows();
@@ -62,6 +79,8 @@ public partial class Main : Node2D
 				// Add instance of Invader as child of PathFollow2D
 				PathFollow2D invaderPath = (PathFollow2D)pathing.GetChild(0);
 				Invader invader = InvaderScene.Instantiate<Invader>();
+				int invaderSpeed = GetInvaderSpeed();
+				invader.Speed = invaderSpeed;
 				invaderPath.AddChild(invader);
 				// Add Pathing to main scene
 				AddChild(pathing);
@@ -135,10 +154,10 @@ public partial class Main : Node2D
 
 	private void OnHudStartGame()
 	{
-		StartLevel();
+		StartLevel(currentLevel);
 	}
 
-	private void StartLevel()
+	private void StartLevel(int level)
 	{
 		SpawnInvaders();
 
