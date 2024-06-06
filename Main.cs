@@ -57,11 +57,11 @@ public partial class Main : Node2D
 		} 
 		else if (currentLevel == 2)
 		{
-			return 400;
+			return 500;
 		} 
 		else
 		{
-			return 500;
+			return 700;
 		}
 	}
 
@@ -188,13 +188,8 @@ public partial class Main : Node2D
 
 	// }
 
-	private void CheckEnemies()
-{
-    if (GetTree().GetNodesInGroup("invaders").Count == 0 
-		&& GetTree().GetNodesInGroup("mothership").Count == 0
-		&& roundStarted)
-    {
-        GD.Print("All enemies have been removed from the scene.");
+	private void MoveToNextLevel()
+	{
 		currentLevel++;
 
 		if (currentLevel < 4)
@@ -202,11 +197,22 @@ public partial class Main : Node2D
 			roundStarted = false;
 			GetNode<HUD>("HUD").SetMessage($"Level {currentLevel}");
 			GetNode<HUD>("HUD").TransitionToLevel();
+			GetNode<Timer>("InvaderShootTimer").WaitTime -= 1;
 		} 
 		else 
 		{
 			// Show Thank you message
 		}
+	}
+
+	private void CheckEnemies()
+{
+    if (GetTree().GetNodesInGroup("invaders").Count == 0 
+		&& GetTree().GetNodesInGroup("mothership").Count == 0
+		&& roundStarted)
+    {
+        GD.Print("All enemies have been removed from the scene.");
+		MoveToNextLevel();
     }
 }
 
