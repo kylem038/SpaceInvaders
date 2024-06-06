@@ -14,6 +14,7 @@ public partial class Main : Node2D
 
 	private int _playerHealth = 3;
 	private int _score = 0;
+	private bool roundStarted = false;
 
 	private int rowStart = 50;
 	private int rowGutter = 50;
@@ -21,7 +22,7 @@ public partial class Main : Node2D
 	private int columnStart = 150;
 	private int columnGutter = 50;
 	private int numberofColumns = 8;
-	private int currentLevel = 3;
+	private int currentLevel = 1;
 
 	private int[] generateColumns()
 	{
@@ -154,11 +155,14 @@ public partial class Main : Node2D
 
 	private void OnHudStartGame()
 	{
-		StartLevel(currentLevel);
+		GD.Print("STARTING LEVEL?");
+		StartLevel();
 	}
 
-	private void StartLevel(int level)
+	private void StartLevel()
 	{
+		roundStarted = true;
+		
 		SpawnInvaders();
 
 		// Start invader shoot timer
@@ -166,6 +170,9 @@ public partial class Main : Node2D
 
 		// Start mothership spawn timer (wait X secs)
 		GetNode<Timer>("MothershipSpawnTimer").Start();
+
+		// Hide Level 1 Message
+		GetNode<Label>("HUD/Message").Hide();
 
 		// Check if music is playing, if not start it up
 		// Its set to loop so just need this once
@@ -176,6 +183,33 @@ public partial class Main : Node2D
 		}
 	}
 
+	// private void GameOver()
+	// {
+
+	// }
+
+	private void CheckEnemies()
+{
+    if (GetTree().GetNodesInGroup("invaders").Count == 0 
+		&& GetTree().GetNodesInGroup("mothership").Count == 0
+		&& roundStarted)
+    {
+        GD.Print("All enemies have been removed from the scene.");
+		currentLevel++;
+
+		if (currentLevel < 4)
+		{
+			roundStarted = false;
+			GetNode<HUD>("HUD").SetMessage($"Level {currentLevel}");
+			GetNode<HUD>("HUD").TransitionToLevel();
+		} 
+		else 
+		{
+			// Show Thank you message
+		}
+    }
+}
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -185,5 +219,6 @@ public partial class Main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		CheckEnemies();
 	}
 }

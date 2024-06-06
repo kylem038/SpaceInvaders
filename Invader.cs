@@ -93,6 +93,7 @@ public partial class Invader : Area2D
     {
 		UpdateScore -= GetNode<Main>("/root/Main").UpdateScore;
 		_explosionTimer.Timeout -= OnTimerTimeout;
+		RemoveFromGroup("invaders");
         base._ExitTree();
     }
 
