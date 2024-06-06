@@ -60,6 +60,9 @@ public partial class Mothership : Area2D
 		lasers.Position = new Vector2(-2, 36);
 		lasers.LinearVelocity = new Vector2(0, lasersVelocity);
 		AddChild(lasers);
+
+		// Play laser sound
+		GetNode<AudioStreamPlayer>("/root/Main/Laser").Play();
 	}
 
 	// Called when the node enters the scene tree for the first time.

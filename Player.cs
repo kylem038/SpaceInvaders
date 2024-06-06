@@ -56,6 +56,11 @@ public partial class Player : Area2D
 
 		// Set the velocity
 		projectileInstance.SetVelocity(new Vector2(0, projectileYVelocity));
+
+		// Play shoot sound
+		AudioStreamPlayer shootSound = GetNode<AudioStreamPlayer>("/root/Main/Projectile");
+		shootSound.PitchScale = (float)GD.RandRange(1, 1.5);
+		shootSound.Play();
 	}
 
 	// Called when the node enters the scene tree for the first time.
