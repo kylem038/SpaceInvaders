@@ -139,11 +139,13 @@ public partial class Main : Node2D
 
 	private void OnPlayerHit()
 	{
+		Timer playerExplosionTimer = GetNode<Timer>("Player/ExplosionTimer");
 		_playerHealth--;
 		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
 		if (_playerHealth == 0)
 		{
-			GD.Print("Implement game over");
+			playerExplosionTimer.Start();
+			GameOver();
 		}
 	}
 
@@ -155,7 +157,6 @@ public partial class Main : Node2D
 
 	private void OnHudStartGame()
 	{
-		GD.Print("STARTING LEVEL?");
 		StartLevel();
 	}
 
@@ -176,17 +177,36 @@ public partial class Main : Node2D
 
 		// Check if music is playing, if not start it up
 		// Its set to loop so just need this once
-		AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
-		if(!music.Playing)
-		{
-			music.Play();
-		}
+		// AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
+		// if(!music.Playing)
+		// {
+		// 	music.Play();
+		// }
 	}
 
-	// private void GameOver()
-	// {
+	private void GameOver()
+	{
+		// Clean up invader & mothership instances
+		GetTree().CallGroup("invaders", Node.MethodName.QueueFree);
 
-	// }
+		Mothership mothership = GetNodeOrNull<Mothership>("MothershipPath/Mothership");
+		if (mothership != null)
+		{
+			mothership.QueueFree();
+		}
+		else
+		{
+			// Stop mothership timer
+			GetNode<Timer>("MothershipSpawnTimer").Stop();
+		}
+		
+
+		GetNode<HUD>("HUD").SetMessage("Game Over");
+		GetNode<Label>("HUD/Message").Show();
+		GetNode<Timer>("HUD/GameOverTimer").Start();
+
+		roundStarted = false;
+	}
 
 	private void MoveToNextLevel()
 	{
@@ -209,7 +229,8 @@ public partial class Main : Node2D
 {
     if (GetTree().GetNodesInGroup("invaders").Count == 0 
 		&& GetTree().GetNodesInGroup("mothership").Count == 0
-		&& roundStarted)
+		&& roundStarted
+		&& _playerHealth != 0)
     {
         GD.Print("All enemies have been removed from the scene.");
 		MoveToNextLevel();

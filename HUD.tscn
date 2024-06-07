@@ -75,5 +75,10 @@ text = "Level 1
 wait_time = 2.0
 one_shot = true
 
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="OnMessageTimerTimeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="OnGameOverTimerTimeout"]

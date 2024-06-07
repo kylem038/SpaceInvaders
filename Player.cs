@@ -13,6 +13,8 @@ public partial class Player : Area2D
 
 	public Vector2 ScreenSize; // Size of the game window.
 
+	private Timer _explosionTimer { get; set; }
+
 	private float ShootCooldown = 1.0f;
 	private float _timeSinceLastShot = 0f;
 	private int projectileYVelocity = -400;
@@ -32,9 +34,18 @@ public partial class Player : Area2D
 	{
 		TriggerExplosion();
 		GetNode<AnimationPlayer>("HitAnimationPlayer").Play("hit");
-		// TODO: Trigger way to flash Player sprite
 		EmitSignal(SignalName.Hit);
 		body.QueueFree();
+	}
+
+	private void OnExplosionGameOverTimerTimeout()
+	{
+		CpuParticles2D explosion = GetNode<CpuParticles2D>("Explosion/CPUParticles2D");
+		if (!explosion.Emitting)
+		{
+			// Remove Player from screen after particles are done
+			QueueFree();
+		}
 	}
 
 	public void Start(Vector2 position)
@@ -67,6 +78,7 @@ public partial class Player : Area2D
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
+		_explosionTimer = GetNode<Timer>("ExplosionTimer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

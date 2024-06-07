@@ -38,6 +38,12 @@ public partial class HUD : CanvasLayer
 		EmitSignal(SignalName.StartGame);
 	}
 
+	public void OnGameOverTimerTimeout()
+	{
+		GetNode<Label>("Message").Hide();
+		GetNode<Button>("StartButton").Show();
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
