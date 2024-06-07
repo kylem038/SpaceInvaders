@@ -14,7 +14,7 @@ public partial class Main : Node2D
 
 	private int _playerHealth = 3;
 	private int _score = 0;
-	private bool roundStarted = false;
+	private bool roundInProgress = false;
 
 	private int rowStart = 50;
 	private int rowGutter = 50;
@@ -162,7 +162,7 @@ public partial class Main : Node2D
 
 	private void StartLevel()
 	{
-		roundStarted = true;
+		roundInProgress = true;
 		
 		SpawnInvaders();
 
@@ -182,6 +182,11 @@ public partial class Main : Node2D
 		// {
 		// 	music.Play();
 		// }
+	}
+
+	private void TransitionFromGameOver()
+	{
+
 	}
 
 	private void GameOver()
@@ -205,7 +210,7 @@ public partial class Main : Node2D
 		GetNode<Label>("HUD/Message").Show();
 		GetNode<Timer>("HUD/GameOverTimer").Start();
 
-		roundStarted = false;
+		roundInProgress = false;
 	}
 
 	private void MoveToNextLevel()
@@ -214,7 +219,7 @@ public partial class Main : Node2D
 
 		if (currentLevel < 4)
 		{
-			roundStarted = false;
+			roundInProgress = false;
 			GetNode<HUD>("HUD").SetMessage($"Level {currentLevel}");
 			GetNode<HUD>("HUD").TransitionToLevel();
 			GetNode<Timer>("InvaderShootTimer").WaitTime -= 1;
@@ -229,7 +234,7 @@ public partial class Main : Node2D
 {
     if (GetTree().GetNodesInGroup("invaders").Count == 0 
 		&& GetTree().GetNodesInGroup("mothership").Count == 0
-		&& roundStarted
+		&& roundInProgress
 		&& _playerHealth != 0)
     {
         GD.Print("All enemies have been removed from the scene.");
