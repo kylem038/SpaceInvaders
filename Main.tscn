@@ -33,6 +33,7 @@ InvaderScene = ExtResource("2_x6cvd")
 PathingScene = ExtResource("3_2m0g2")
 PlayerScene = ExtResource("1_r8oak")
 MothershipPathingScene = ExtResource("4_cn6u2")
+BunkerScene = ExtResource("7_qfodg")
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(320, 450)
@@ -48,9 +49,6 @@ wait_time = 15.0
 one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource("6_wvp5v")]
-
-[node name="Bunker" parent="." instance=ExtResource("7_qfodg")]
-position = Vector2(320, 364)
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ai6mv")
