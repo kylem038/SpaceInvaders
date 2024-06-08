@@ -5,8 +5,6 @@ public partial class HUD : CanvasLayer
 	[Signal]
 	public delegate void StartGameEventHandler();
 
-	// public bool gameStarted = false;
-
 	public void SetMessage(string text)
 	{
 		GetNode<Label>("Message").Text = text;
@@ -25,10 +23,6 @@ public partial class HUD : CanvasLayer
 	public void TransitionToLevel()
 	{
 		GetNode<Label>("Message").Show();
-		// if (gameStarted)
-		// {
-			
-		// }
 		GetNode<Timer>("MessageTimer").Start();
 	}
 

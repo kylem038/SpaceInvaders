@@ -162,16 +162,16 @@ public partial class Main : Node2D
 	private void OnHudStartGame()
 	{
 		GD.Print("We're starting a new game");
-		// GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
-		// GetNode<HUD>("HUD").UpdateScore(_score);
 		StartLevel();
 	}
 
 	private void TransitionFromGameOver()
 	{
 		_playerHealth = 3;
-		currentLevel = 1;
+		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
 		_score = 0;
+		GetNode<HUD>("HUD").UpdateScore(_score);
+		currentLevel = 1;
 
 		Player newPlayer = PlayerScene.Instantiate<Player>();
 		Marker2D playerStartLocation = GetNode<Marker2D>("PlayerStart");
