@@ -5,6 +5,11 @@ public partial class HUD : CanvasLayer
 	[Signal]
     public delegate void StartGameEventHandler();
 
+	public void SetMessage(string text)
+	{
+		GetNode<Label>("Message").Text = text;
+	}
+
 	public void UpdateHealth(int health)
 	{
 		GetNode<Label>("HealthLabel").Text = "Health: " + health.ToString();
@@ -15,11 +20,29 @@ public partial class HUD : CanvasLayer
 		GetNode<Label>("ScoreLabel").Text = "Score: " + score.ToString();
 	}
 
+	public void TransitionToLevel()
+	{
+		GetNode<Label>("Message").Show();
+		GetNode<Label>("Message").Text = "Level 1";
+		GetNode<Timer>("MessageTimer").Start();
+	}
+
 	private void OnStartButtonPressed()
 	{
 		GetNode<Button>("StartButton").Hide();
 		GetNode<Label>("ControlsLabel").Hide();
+		TransitionToLevel();
+	}
+
+	public void OnMessageTimerTimeout()
+	{
 		EmitSignal(SignalName.StartGame);
+	}
+
+	public void OnGameOverTimerTimeout()
+	{
+		GetNode<Label>("Message").Hide();
+		GetNode<Button>("StartButton").Show();
 	}
 
 	// Called when the node enters the scene tree for the first time.

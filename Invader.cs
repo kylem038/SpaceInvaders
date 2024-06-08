@@ -9,7 +9,7 @@ public partial class Invader : Area2D
 	public PackedScene ProjectileScene;
 
 	[Export]
-	private int Speed = 300;
+	public int Speed {get; set;}
 
 	private float MoveCooldown = 0.5f;
 	private float _timeSinceLastMove = 0f;
@@ -93,6 +93,7 @@ public partial class Invader : Area2D
     {
 		UpdateScore -= GetNode<Main>("/root/Main").UpdateScore;
 		_explosionTimer.Timeout -= OnTimerTimeout;
+		RemoveFromGroup("invaders");
         base._ExitTree();
     }
 

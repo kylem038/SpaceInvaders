@@ -82,4 +82,8 @@ libraries = {
 "": SubResource("AnimationLibrary_rve81")
 }
 
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="ExplosionTimer" to="." method="OnExplosionGameOverTimerTimeout"]
