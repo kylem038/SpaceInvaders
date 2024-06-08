@@ -24,8 +24,7 @@ public partial class Main : Node2D
 	private int numberOfRows = 4;
 	private int columnStart = 150;
 	private int columnGutter = 50;
-	// private int numberofColumns = 8;
-	private int numberofColumns = 2;
+	private int numberofColumns = 8;
 	private int currentLevel = 1;
 
 	private int[] generateColumns()
