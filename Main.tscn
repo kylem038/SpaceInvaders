@@ -31,6 +31,7 @@ sources/0 = SubResource("TileSetAtlasSource_mifup")
 script = ExtResource("1_qfkws")
 InvaderScene = ExtResource("2_x6cvd")
 PathingScene = ExtResource("3_2m0g2")
+PlayerScene = ExtResource("1_r8oak")
 MothershipPathingScene = ExtResource("4_cn6u2")
 
 [node name="PlayerStart" type="Marker2D" parent="."]

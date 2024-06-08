@@ -34,6 +34,7 @@ public partial class Player : Area2D
 	{
 		TriggerExplosion();
 		GetNode<AnimationPlayer>("HitAnimationPlayer").Play("hit");
+		GD.Print("Emitting hit signal");
 		EmitSignal(SignalName.Hit);
 		body.QueueFree();
 	}
@@ -81,8 +82,8 @@ public partial class Player : Area2D
 		_explosionTimer = GetNode<Timer>("ExplosionTimer");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		_timeSinceLastShot += (float)delta;
 		Vector2 velocity = Vector2.Zero;

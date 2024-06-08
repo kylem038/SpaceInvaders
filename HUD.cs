@@ -23,6 +23,7 @@ public partial class HUD : CanvasLayer
 	public void TransitionToLevel()
 	{
 		GetNode<Label>("Message").Show();
+		GetNode<Label>("Message").Text = "Level 1";
 		GetNode<Timer>("MessageTimer").Start();
 	}
 

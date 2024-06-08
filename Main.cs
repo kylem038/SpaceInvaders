@@ -10,6 +10,9 @@ public partial class Main : Node2D
 	public PackedScene PathingScene { get; set; }
 
 	[Export]
+	public PackedScene PlayerScene { get; set; }
+
+	[Export]
 	public PackedScene MothershipPathingScene { get; set; }
 
 	private int _playerHealth = 3;
@@ -137,7 +140,7 @@ public partial class Main : Node2D
 		SpawnMothership();
 	}
 
-	private void OnPlayerHit()
+	public void OnPlayerHit()
 	{
 		Timer playerExplosionTimer = GetNode<Timer>("Player/ExplosionTimer");
 		_playerHealth--;
@@ -157,12 +160,35 @@ public partial class Main : Node2D
 
 	private void OnHudStartGame()
 	{
+		_playerHealth = 3;
+		currentLevel = 1;
+		_score = 0;
+		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
+		GetNode<HUD>("HUD").UpdateScore(_score);
 		StartLevel();
+	}
+
+	private void TransitionFromGameOver()
+	{
+		Player newPlayer = PlayerScene.Instantiate<Player>();
+		Marker2D playerStartLocation = GetNode<Marker2D>("PlayerStart");
+		newPlayer.Position = playerStartLocation.Position;
+		newPlayer.Hit += OnPlayerHit;
+		AddChild(newPlayer);
+		
 	}
 
 	private void StartLevel()
 	{
 		roundInProgress = true;
+
+		// Coming from a game over we need to see if Player is still in the scene
+		// If not we need a new player
+		Player player = GetNodeOrNull<Player>("Player");
+		if (player == null)
+		{
+			TransitionFromGameOver();
+		}
 		
 		SpawnInvaders();
 
@@ -184,20 +210,14 @@ public partial class Main : Node2D
 		// }
 	}
 
-	private void TransitionFromGameOver()
-	{
-
-	}
-
 	private void GameOver()
 	{
 		// Clean up invader & mothership instances
 		GetTree().CallGroup("invaders", Node.MethodName.QueueFree);
 
-		Mothership mothership = GetNodeOrNull<Mothership>("MothershipPath/Mothership");
-		if (mothership != null)
+		if (GetTree().GetNodesInGroup("mothership").Count != 0)
 		{
-			mothership.QueueFree();
+			GetTree().CallGroup("mothership", Node.MethodName.QueueFree);
 		}
 		else
 		{
@@ -231,16 +251,16 @@ public partial class Main : Node2D
 	}
 
 	private void CheckEnemies()
-{
-    if (GetTree().GetNodesInGroup("invaders").Count == 0 
-		&& GetTree().GetNodesInGroup("mothership").Count == 0
-		&& roundInProgress
-		&& _playerHealth != 0)
-    {
-        GD.Print("All enemies have been removed from the scene.");
-		MoveToNextLevel();
-    }
-}
+	{
+		if (GetTree().GetNodesInGroup("invaders").Count == 0 
+			&& GetTree().GetNodesInGroup("mothership").Count == 0
+			&& roundInProgress
+			&& _playerHealth != 0)
+		{
+			GD.Print("All enemies have been removed from the scene.");
+			MoveToNextLevel();
+		}
+	}
 
 
 	// Called when the node enters the scene tree for the first time.
