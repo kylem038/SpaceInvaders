@@ -9,5 +9,6 @@
 - Add background [X]
 - Add music and sfx [X]
 - Add variety of invader assets []
-- Add additional levels (decrease invader shoot cooldown [X], add additional bunkers [])
+- Add additional levels (decrease invader shoot cooldown [X], add additional bunkers [X])
 - Add Game Over [X]
+- Add Thank You Message []
