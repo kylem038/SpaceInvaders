@@ -203,11 +203,11 @@ public partial class Main : Node2D
 
 		// Check if music is playing, if not start it up
 		// Its set to loop so just need this once
-		// AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
-		// if(!music.Playing)
-		// {
-		// 	music.Play();
-		// }
+		AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
+		if(!music.Playing)
+		{
+			music.Play();
+		}
 	}
 
 	private void GameOver()
