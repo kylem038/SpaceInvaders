@@ -167,12 +167,17 @@ public partial class Main : Node2D
 
 	private void TransitionFromGameOver()
 	{
+		// Reset hud stats
 		_playerHealth = 3;
 		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
 		_score = 0;
 		GetNode<HUD>("HUD").UpdateScore(_score);
 		currentLevel = 1;
 
+		// Reset shoot timer
+		GetNode<Timer>("InvaderShootTimer").WaitTime = 3;
+
+		// Add new player
 		Player newPlayer = PlayerScene.Instantiate<Player>();
 		Marker2D playerStartLocation = GetNode<Marker2D>("PlayerStart");
 		newPlayer.Position = playerStartLocation.Position;
