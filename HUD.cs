@@ -3,7 +3,7 @@ using Godot;
 public partial class HUD : CanvasLayer
 {
 	[Signal]
-    public delegate void StartGameEventHandler();
+	public delegate void StartGameEventHandler();
 
 	public void SetMessage(string text)
 	{
@@ -23,7 +23,6 @@ public partial class HUD : CanvasLayer
 	public void TransitionToLevel()
 	{
 		GetNode<Label>("Message").Show();
-		GetNode<Label>("Message").Text = "Level 1";
 		GetNode<Timer>("MessageTimer").Start();
 	}
 
@@ -31,6 +30,7 @@ public partial class HUD : CanvasLayer
 	{
 		GetNode<Button>("StartButton").Hide();
 		GetNode<Label>("ControlsLabel").Hide();
+		GetNode<Label>("Message").Text = "Level 1";
 		TransitionToLevel();
 	}
 

@@ -57,11 +57,11 @@ public partial class Main : Node2D
 		if (currentLevel == 1)
 		{
 			return 300;
-		} 
+		}
 		else if (currentLevel == 2)
 		{
 			return 500;
-		} 
+		}
 		else
 		{
 			return 700;
@@ -100,22 +100,22 @@ public partial class Main : Node2D
 	}
 
 	private List<T> GetChildrenOfType<T>(Node parentNode) where T : Node
-    {
-        List<T> childrenOfType = new List<T>();
+	{
+		List<T> childrenOfType = new List<T>();
 
-        foreach (Node child in parentNode.GetChildren())
-        {
-            if (child is T)
-            {
-                childrenOfType.Add(child as T);
-            }
+		foreach (Node child in parentNode.GetChildren())
+		{
+			if (child is T)
+			{
+				childrenOfType.Add(child as T);
+			}
 
-            // Recursively check for children of this child
-            childrenOfType.AddRange(GetChildrenOfType<T>(child));
-        }
+			// Recursively check for children of this child
+			childrenOfType.AddRange(GetChildrenOfType<T>(child));
+		}
 
-        return childrenOfType;
-    }
+		return childrenOfType;
+	}
 
 	private Invader getRandomInvaderInstance()
 	{
@@ -160,22 +160,29 @@ public partial class Main : Node2D
 
 	private void OnHudStartGame()
 	{
-		_playerHealth = 3;
-		currentLevel = 1;
-		_score = 0;
-		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
-		GetNode<HUD>("HUD").UpdateScore(_score);
+		GD.Print("We're starting a new game");
 		StartLevel();
 	}
 
 	private void TransitionFromGameOver()
 	{
+		// Reset hud stats
+		_playerHealth = 3;
+		GetNode<HUD>("HUD").UpdateHealth(_playerHealth);
+		_score = 0;
+		GetNode<HUD>("HUD").UpdateScore(_score);
+		currentLevel = 1;
+
+		// Reset shoot timer
+		GetNode<Timer>("InvaderShootTimer").WaitTime = 3;
+
+		// Add new player
 		Player newPlayer = PlayerScene.Instantiate<Player>();
 		Marker2D playerStartLocation = GetNode<Marker2D>("PlayerStart");
 		newPlayer.Position = playerStartLocation.Position;
 		newPlayer.Hit += OnPlayerHit;
 		AddChild(newPlayer);
-		
+
 	}
 
 	private void StartLevel()
@@ -189,7 +196,7 @@ public partial class Main : Node2D
 		{
 			TransitionFromGameOver();
 		}
-		
+
 		SpawnInvaders();
 
 		// Start invader shoot timer
@@ -204,7 +211,7 @@ public partial class Main : Node2D
 		// Check if music is playing, if not start it up
 		// Its set to loop so just need this once
 		AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
-		if(!music.Playing)
+		if (!music.Playing)
 		{
 			music.Play();
 		}
@@ -224,7 +231,7 @@ public partial class Main : Node2D
 			// Stop mothership timer
 			GetNode<Timer>("MothershipSpawnTimer").Stop();
 		}
-		
+
 
 		GetNode<HUD>("HUD").SetMessage("Game Over");
 		GetNode<Label>("HUD/Message").Show();
@@ -243,8 +250,8 @@ public partial class Main : Node2D
 			GetNode<HUD>("HUD").SetMessage($"Level {currentLevel}");
 			GetNode<HUD>("HUD").TransitionToLevel();
 			GetNode<Timer>("InvaderShootTimer").WaitTime -= 1;
-		} 
-		else 
+		}
+		else
 		{
 			// Show Thank you message
 		}
@@ -252,7 +259,7 @@ public partial class Main : Node2D
 
 	private void CheckEnemies()
 	{
-		if (GetTree().GetNodesInGroup("invaders").Count == 0 
+		if (GetTree().GetNodesInGroup("invaders").Count == 0
 			&& GetTree().GetNodesInGroup("mothership").Count == 0
 			&& roundInProgress
 			&& _playerHealth != 0)
