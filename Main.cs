@@ -317,6 +317,10 @@ public partial class Main : Node2D
 		else
 		{
 			// Show Thank you message
+			roundInProgress = false;
+			GetNode<HUD>("HUD").SetMessage("Victory! Thank You For Playing My Game!");
+			GetNode<Label>("HUD/Message").Show();
+			GetNode<Timer>("MothershipSpawnTimer").Stop();
 		}
 	}
 
@@ -342,6 +346,10 @@ public partial class Main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		CheckEnemies();
+		if (roundInProgress)
+		{
+			CheckEnemies();
+		}
+		
 	}
 }
