@@ -74,6 +74,40 @@ public partial class Main : Node2D
 		}
 	}
 
+	private void SetInvaderSpriteFrames(int row, ref Invader invader)
+	{
+		Texture2D texture;
+
+		switch (row)
+        {
+            case 0:
+                texture = (Texture2D)ResourceLoader.Load("res://art/Invader4.png");
+                break;
+            case 1:
+                texture = (Texture2D)ResourceLoader.Load("res://art/Invader3.png");
+                break;
+            case 2:
+                texture = (Texture2D)ResourceLoader.Load("res://art/Invader2.png");
+                break;
+            case 3:
+                texture = (Texture2D)ResourceLoader.Load("res://art/Invader1.png");
+                break;
+            default:
+                GD.Print("Invader asset out of range");
+				texture = null;
+                break;
+        }
+
+		if (texture != null)
+		{
+			SpriteFrames spriteFrames = new SpriteFrames();
+			spriteFrames.AddFrame("default", texture);
+			AnimatedSprite2D enemySprite = invader.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+			enemySprite.SpriteFrames = spriteFrames;
+		}
+	}
+
 	private void SpawnInvaders()
 	{
 		int[] invaderRows = generateRows();
@@ -91,6 +125,7 @@ public partial class Main : Node2D
 				Invader invader = InvaderScene.Instantiate<Invader>();
 				int invaderSpeed = GetInvaderSpeed();
 				invader.Speed = invaderSpeed;
+				SetInvaderSpriteFrames(i, ref invader);
 				invaderPath.AddChild(invader);
 				// Add Pathing to main scene
 				AddChild(pathing);

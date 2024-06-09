@@ -8,7 +8,7 @@
 - Use shader to indicate when Player is hit [X]
 - Add background [X]
 - Add music and sfx [X]
-- Add variety of invader assets []
+- Add variety of invader assets [X]
 - Add additional levels (decrease invader shoot cooldown [X], add additional bunkers [X])
 - Add Game Over [X]
-- Add Thank You Message []
+- Add Thank You Message [X]
