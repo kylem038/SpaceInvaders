@@ -11,4 +11,4 @@
 - Add variety of invader assets []
 - Add additional levels (decrease invader shoot cooldown [X], add additional bunkers [X])
 - Add Game Over [X]
-- Add Thank You Message []
+- Add Thank You Message [X]
