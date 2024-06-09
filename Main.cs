@@ -133,7 +133,11 @@ public partial class Main : Node2D
 
 	public class BunkerLocations 
 	{
-		public Vector2 level1 = new Vector2(320, 384);
+		public Vector2[] level1 = { 
+			new Vector2(320, 384),
+			new Vector2(192, 384),
+			new Vector2(448, 384)
+		};
 		public Vector2[] level2 = {
 			new Vector2(192, 384),
 			new Vector2(448, 384)
@@ -141,46 +145,44 @@ public partial class Main : Node2D
 
 		public Vector2[] level3 = {
 			new Vector2(256, 384),
-			new Vector2(384, 384)
+			new Vector2(384, 384),
+			new Vector2(192, 384),
+			new Vector2(448, 384)
 		};
 	}
 
 	private void SpawnBunkers()
 	{
 		GetTree().CallGroup("bunkers", Node.MethodName.QueueFree);
+		Vector2[] locations;
+
+
 		if (currentLevel == 1)
 		{
-			// spawn 1 bunker at 320,384
-			Bunker bunker = BunkerScene.Instantiate<Bunker>();
-			bunker.Position = new Vector2(320, 384);
-			AddChild(bunker);
+			// spawn 3 bunkers
+			locations = bunkerLocations.level1;
 		}
 		else if (currentLevel == 2)
 		{
 			// spawn 2 bunkers at (192, 384) & (448, 384)
-			Vector2[] locations = bunkerLocations.level2;
-			for (int i = 0; i < 2; i++)
-			{
-				Bunker bunker = BunkerScene.Instantiate<Bunker>();
-				bunker.Position = locations[i];
-				AddChild(bunker);
-			}
-			
+			locations = bunkerLocations.level2;
 		}
 		else if (currentLevel == 3)
 		{
-			// spawn 2 bunkers at (256, 384) & (384, 384)
-			Vector2[] locations = bunkerLocations.level3;
-			for (int i = 0; i < 2; i++)
-			{
-				Bunker bunker = BunkerScene.Instantiate<Bunker>();
-				bunker.Position = locations[i];
-				AddChild(bunker);
-			}
+			// spawn 4 bunkers
+			locations = bunkerLocations.level3;
 		}
 		else
 		{
+			locations = null;
 			GD.Print("Warning: out of level range for bunkers");
+		}
+
+		for (int i = 0; i < locations.Length; i++)
+		{
+			Bunker bunker = BunkerScene.Instantiate<Bunker>();
+			bunker.Position = locations[i];
+			AddChild(bunker);
 		}
 	}
 
