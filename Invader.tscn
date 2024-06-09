@@ -28,7 +28,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.651368, 0.0952003, 0.0703175, 1, 0.68206
 
 [node name="Invader" type="Area2D" groups=["invaders"]]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 69
 script = ExtResource("1_p4iqt")
 ProjectileScene = ExtResource("2_8pfsj")
 metadata/_edit_group_ = true

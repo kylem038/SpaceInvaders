@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class Main : Node2D
@@ -14,6 +15,11 @@ public partial class Main : Node2D
 
 	[Export]
 	public PackedScene MothershipPathingScene { get; set; }
+
+	[Export]
+	public PackedScene BunkerScene { get; set; }
+
+	private BunkerLocations bunkerLocations { get; set; }
 
 	private int _playerHealth = 3;
 	private int _score = 0;
@@ -125,6 +131,61 @@ public partial class Main : Node2D
 		return randomInvader;
 	}
 
+	public class BunkerLocations 
+	{
+		public Vector2[] level1 = { 
+			new Vector2(320, 384),
+			new Vector2(192, 384),
+			new Vector2(448, 384)
+		};
+		public Vector2[] level2 = {
+			new Vector2(192, 384),
+			new Vector2(448, 384)
+		};
+
+		public Vector2[] level3 = {
+			new Vector2(256, 384),
+			new Vector2(384, 384),
+			new Vector2(192, 384),
+			new Vector2(448, 384)
+		};
+	}
+
+	private void SpawnBunkers()
+	{
+		GetTree().CallGroup("bunkers", Node.MethodName.QueueFree);
+		Vector2[] locations;
+
+
+		if (currentLevel == 1)
+		{
+			// spawn 3 bunkers
+			locations = bunkerLocations.level1;
+		}
+		else if (currentLevel == 2)
+		{
+			// spawn 2 bunkers at (192, 384) & (448, 384)
+			locations = bunkerLocations.level2;
+		}
+		else if (currentLevel == 3)
+		{
+			// spawn 4 bunkers
+			locations = bunkerLocations.level3;
+		}
+		else
+		{
+			locations = null;
+			GD.Print("Warning: out of level range for bunkers");
+		}
+
+		for (int i = 0; i < locations.Length; i++)
+		{
+			Bunker bunker = BunkerScene.Instantiate<Bunker>();
+			bunker.Position = locations[i];
+			AddChild(bunker);
+		}
+	}
+
 	private void OnInvaderShootTimerTimeout()
 	{
 		var invaders = GetTree().GetNodesInGroup("invaders");
@@ -198,6 +259,7 @@ public partial class Main : Node2D
 		}
 
 		SpawnInvaders();
+		SpawnBunkers();
 
 		// Start invader shoot timer
 		GetNode<Timer>("InvaderShootTimer").Start();
@@ -221,6 +283,7 @@ public partial class Main : Node2D
 	{
 		// Clean up invader & mothership instances
 		GetTree().CallGroup("invaders", Node.MethodName.QueueFree);
+		GetTree().CallGroup("bunkers", Node.MethodName.QueueFree);
 
 		if (GetTree().GetNodesInGroup("mothership").Count != 0)
 		{
@@ -273,6 +336,7 @@ public partial class Main : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		bunkerLocations = new BunkerLocations();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

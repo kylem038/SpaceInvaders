@@ -4,9 +4,9 @@
 [ext_resource type="SpriteFrames" uid="uid://cihejr41lmq88" path="res://BunkerSpriteFrames.tres" id="2_q4qmj"]
 [ext_resource type="PackedScene" uid="uid://deh6r6fafabdq" path="res://Explosion.tscn" id="3_omxln"]
 
-[node name="Bunker" type="Area2D"]
+[node name="Bunker" type="Area2D" groups=["bunkers"]]
 collision_layer = 65
-collision_mask = 44
+collision_mask = 46
 script = ExtResource("1_8b57f")
 metadata/_edit_group_ = true
 
@@ -19,4 +19,5 @@ frame_progress = 0.834841
 
 [node name="Explosion" parent="." instance=ExtResource("3_omxln")]
 
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

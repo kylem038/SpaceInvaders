@@ -30,13 +30,24 @@ public partial class Player : Area2D
 		GetNode<AudioStreamPlayer>("/root/Main/Explosion").Play();
 	}
 
-	private void OnBodyEntered(Node2D body)
+	private void TriggerHit(ref Node2D body)
 	{
 		TriggerExplosion();
 		GetNode<AnimationPlayer>("HitAnimationPlayer").Play("hit");
 		GD.Print("Emitting hit signal");
 		EmitSignal(SignalName.Hit);
 		body.QueueFree();
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		TriggerHit(ref body);
+	}
+
+	// Handle invader pathing into Player
+	private void OnAreaEntered(Node2D body)
+	{
+		TriggerHit(ref body);
 	}
 
 	private void OnExplosionGameOverTimerTimeout()
