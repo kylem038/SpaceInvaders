@@ -6,7 +6,7 @@
 
 [node name="Bunker" type="Area2D" groups=["bunkers"]]
 collision_layer = 65
-collision_mask = 44
+collision_mask = 46
 script = ExtResource("1_8b57f")
 metadata/_edit_group_ = true
 

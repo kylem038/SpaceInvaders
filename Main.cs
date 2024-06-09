@@ -31,7 +31,7 @@ public partial class Main : Node2D
 	private int columnStart = 150;
 	private int columnGutter = 50;
 	private int numberofColumns = 8;
-	private int currentLevel = 1;
+	private int currentLevel = 3;
 
 	private int[] generateColumns()
 	{
