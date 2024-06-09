@@ -15,7 +15,7 @@ public partial class Bunker : Area2D
 		GetNode<AudioStreamPlayer>("/root/Main/Explosion").Play();
 	}
 
-	private void OnBodyEntered(Node2D body)
+	private void TriggerHit(ref Node2D body)
 	{
 		TriggerExplosion();
 		_health -= 1;
@@ -29,6 +29,16 @@ public partial class Bunker : Area2D
 		}
 		
 		body.QueueFree();
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		TriggerHit(ref body);
+	}
+
+	private void OnAreaEntered(Node2D body)
+	{
+		TriggerHit(ref body);
 	}
 
 	// Called when the node enters the scene tree for the first time.
